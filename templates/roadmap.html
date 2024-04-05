@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel='stylesheet' href='https://rawcdn.githack.com/SochavaAG/example-mycode/master/_common/css/reset.css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/roadmap.css">
+</head>
+<div class="ag-timeline-block">
+  <div class="ag-timeline_title-box">
+    <div id="b1" class="ag-timeline_tagline">{{ b1 }} Roadmap</div>
+  </div>
+  <section class="ag-section">
+    <div class="ag-format-container">
+      <div class="js-timeline ag-timeline">
+        <div class="js-timeline_line ag-timeline_line">
+          <div class="js-timeline_line-progress ag-timeline_line-progress"></div>
+        </div>
+        <div class="ag-timeline_list">
+          <div class="js-timeline_item ag-timeline_item">
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point"></div>
+              </div>
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta"></div>
+              </div>
+            </div>
+            <div class="ag-timeline-card_item">
+              <div class="ag-timeline-card_inner">
+                <div class="ag-timeline-card_info">
+                  <div class="ag-timeline-card_title">1st Year</div>
+                  <div class="ag-timeline-card_desc">
+                    <p>{{ roadmapData.yr1 }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ag-timeline-card_arrow"></div>
+            </div>
+          </div>
+
+          <div class="js-timeline_item ag-timeline_item">
+            <div class="ag-timeline-card_box">
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta"></div>
+              </div>
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point"></div>
+              </div>
+            </div>
+            <div class="ag-timeline-card_item">
+              <div class="ag-timeline-card_inner">
+                <div class="ag-timeline-card_info">
+                  <div class="ag-timeline-card_title">2nd year</div>
+                  <div class="ag-timeline-card_desc">
+                    <p>{{ roadmapData.yr2 }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ag-timeline-card_arrow"></div>
+            </div>
+          </div>
+
+          <div class="js-timeline_item ag-timeline_item">
+            <div class="ag-timeline-card_box">
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point"></div>
+              </div>
+              <div class="ag-timeline-card_meta-box">
+                <div class="ag-timeline-card_meta"></div>
+              </div>
+            </div>
+            <div class="ag-timeline-card_item">
+              <div class="ag-timeline-card_inner">
+                <div class="ag-timeline-card_info">
+                  <div class="ag-timeline-card_title">3rd year</div>
+                  <div class="ag-timeline-card_desc">
+                    <p>{{ roadmapData.yr3 }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ag-timeline-card_arrow"></div>
+            </div>
+          </div>
+
+          <div class="js-timeline_item ag-timeline_item">
+            <div class="ag-timeline-card_box">
+              <div class="ag-timeline-card_meta-box">
+              </div>
+              <div class="js-timeline-card_point-box ag-timeline-card_point-box">
+                <div class="ag-timeline-card_point"></div>
+              </div>
+            </div>
+            <div class="ag-timeline-card_item">
+              <div class="ag-timeline-card_inner">
+                <div class="ag-timeline-card_info">
+                  <div class="ag-timeline-card_title">4th year</div>
+                  <div class="ag-timeline-card_desc">
+                    <p>{{ roadmapData.yr4 }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ag-timeline-card_arrow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    var b1 = $("#b1").text().trim();
+    // console.log("Selected branch:", b1);
+    $("#b1-title").text(b1.toUpperCase() + " Roadmap");
+
+    if (roadmaps.hasOwnProperty(b1)) {
+      var roadmap_b1 = roadmaps[b1];
+      populateYearContent(roadmap_b1);
+    } else {
+      // console.log("Roadmap for", b1, "does not exist.");
+    }
+
+    function populateYearContent(roadmapData) {
+      console.log("Roadmap data:", roadmapData);
+      for (var i = 1; i <= 4; i++) {
+        var content = roadmapData["yr" + i];
+        // console.log("Content for year " + i + ":", content);
+        $("#yr" + i + "_content").html(content);
+      }
+    }
+  });
+  (function ($) {
+    $(function () {
+
+
+      $(window).on('scroll', function () {
+        fnOnScroll();
+      });
+
+      $(window).on('resize', function () {
+        fnOnResize();
+      });
+
+
+      var agTimeline = $('.js-timeline'),
+        agTimelineLine = $('.js-timeline_line'),
+        agTimelineLineProgress = $('.js-timeline_line-progress'),
+        agTimelinePoint = $('.js-timeline-card_point-box'),
+        agTimelineItem = $('.js-timeline_item'),
+        agOuterHeight = $(window).outerHeight(),
+        agHeight = $(window).height(),
+        f = -1,
+        agFlag = false;
+
+      function fnOnScroll() {
+        agPosY = $(window).scrollTop();
+
+        fnUpdateFrame();
+      }
+
+      function fnOnResize() {
+        agPosY = $(window).scrollTop();
+        agHeight = $(window).height();
+
+        fnUpdateFrame();
+      }
+
+      function fnUpdateWindow() {
+        agFlag = false;
+
+        agTimelineLine.css({
+          top: agTimelineItem.first().find(agTimelinePoint).offset().top - agTimelineItem.first().offset().top,
+          bottom: agTimeline.offset().top + agTimeline.outerHeight() - agTimelineItem.last().find(agTimelinePoint).offset().top
+        });
+
+        f !== agPosY && (f = agPosY, agHeight, fnUpdateProgress());
+      }
+
+      function fnUpdateProgress() {
+        var agTop = agTimelineItem.last().find(agTimelinePoint).offset().top;
+
+        i = agTop + agPosY - $(window).scrollTop();
+        a = agTimelineLineProgress.offset().top + agPosY - $(window).scrollTop();
+        n = agPosY - a + agOuterHeight / 2;
+        i <= agPosY + agOuterHeight / 2 && (n = i - a);
+        agTimelineLineProgress.css({ height: n + "px" });
+
+        agTimelineItem.each(function () {
+          var agTop = $(this).find(agTimelinePoint).offset().top;
+
+          (agTop + agPosY - $(window).scrollTop()) < agPosY + .6 * agOuterHeight ? $(this).addClass('js-ag-active') : $(this).removeClass('js-ag-active');
+        })
+      }
+
+      function fnUpdateFrame() {
+        agFlag || requestAnimationFrame(fnUpdateWindow);
+        agFlag = true;
+      }
+    });
+  })(jQuery);
+</script>
+<script src="/static/roadmaps.js">
+</script>
+
+</body>
+
+</html>
+{% endblock %}

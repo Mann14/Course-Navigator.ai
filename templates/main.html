@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Course Navigator.Ai - Branch {{b1}}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+    
+        #content-container {
+            max-width: 80vw;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /*overflow-x: hidden; */
+            position: relative;
+        }
+    
+        h1 {
+            margin: 0;
+            padding: 0 20px;
+            color: #4285f4;
+            border-bottom: 2px solid #4285f4;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        .subtitle {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    
+        .subtitle p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+    
+        .box-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: whitesmoke;
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    
+        .interest-preferences,
+        .course {
+            flex: 1;
+            padding: 0 10px;
+        }
+    
+        .interest-preferences p,
+        .course p {
+            margin: 5px 0;
+        }
+    
+        .box-container p {
+            flex: 1;
+            text-align: center;
+        }
+    
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    
+        .content {
+            /* display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px; */
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .content-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .print-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+        }
+    
+        .print-icon:hover {
+            background-color: #0d6efd;
+        }
+    
+        .tooltip {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 10px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        .print-icon:hover + .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        #branch-image img,
+#branch-graph img {
+    max-width: 100%;
+    height: auto;
+    width: 100%; /* Ensure the image fills its container */
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#branch-image,
+#branch-graph {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Adjust the height as needed for symmetry */
+    overflow: hidden; /* Ensure images don't overflow their containers */
+}
+        @media screen and (max-width: 772px) {
+            .content {
+                display: block;
+            }
+        }
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Adjust column width as needed */
+            grid-gap: 20px;
+        }
+
+        .details-column {
+            padding: 10px; /* Adjust padding as needed */
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div id="content-container">
+        <h1>Branch Recommendation</h1>
+
+        <div class="print-icon" onclick="window.print()">
+            <i class="fas fa-download print-icon"></i>
+            <div class="tooltip">Download</div>
+        </div>
+    
+        <div class="details">
+            <div class="details-column">
+                <p><strong>Full Name:</strong> {{ full_name }}</p>
+                <p><strong>Email ID:</strong> {{ email }}</p>
+                <p><strong>Whatsapp Number:</strong> {{ whatsapp }}</p>
+            </div>
+            <div class="details-column">
+                <p><strong id="exam-rank-label">Exam Rank:</strong> {{ rank }}</p>
+                <p><strong>12th Stream:</strong> {{ stream }}</p>
+                <p><strong>12th Percentage:</strong> {{ percentage }}</p>
+            </div>
+        </div>
+    
+        <div class="subtitle">
+            <div class="box-container">
+                <div class="interest-preferences">
+                    <p><strong>Interest Preferences:</strong> {{ interest }}</p>
+                </div>
+                <div class="course">
+                    <p><strong>Course:</strong> {{ crs }}</p>
+                </div>
+            </div>
+            <p style="font-size: larger;"><strong>We recommend you this branch:</strong> {{ b1 }}</p>
+        </div>
+    
+        <div class="content">
+            <div id="branch-image" class="content-item">
+                {% if branch_image %}
+                    <img src="{{ branch_image }}" alt="Branch Image">
+                {% endif %}
+            </div>
+            <div id="branch-content" class="content-item">
+                <h1>Branch Description</h1>
+                {{ branch_content }}
+            </div>
+            <div id="branch-insight" class="content-item">
+                <h1>Branch Insight</h1>
+                <p>{{ insight | safe  }}</p>
+            </div>
+            <div id="branch-graph" class="content-item">
+                <img src="{{ graph }}" alt="">
+            </div>
+        </div>
+        {{super()}}  
+    </div>
+    
+    <!-- <div class="print-icon" onclick="window.print()">
+        <i class="fas fa-download print-icon"></i>
+        <div class="tooltip">Download</div>
+    </div> -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var examRankLabel = document.getElementById('exam-rank-label');
+            var rankValue = "{{ stream }}";
+    
+            if (rankValue === "PCM") {
+                examRankLabel.textContent = "JEE Rank:";
+            } else if (rankValue === "PCB") {
+                examRankLabel.textContent = "NEET Rank:";
+            }
+            else {
+                examRankLabel.textContent = "CUET Rank:";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+{% endblock %}

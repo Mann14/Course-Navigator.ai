@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form with iFrame</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+<style>
+  body{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+.container11 ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%; 
+}
+ul.ks-cboxtags {
+    list-style: none;
+    /* padding: 20px; */
+}
+ul.ks-cboxtags li{
+  display: inline;
+  /* padding: 0 20px; */
+}
+ul.ks-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 8px 8px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 8px;
+    /* padding: 2px 6px 2px 2px; */
+    content: "\f067";
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  display: absolute;
+}
+ul.ks-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
+@media screen and (max-width:800px){
+  .container11 ul{
+    grid-template-columns: 1fr 1fr 1fr;
+    
+  }
+}
+@media screen and (max-width:600px) {
+  .container11 ul{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media screen and (max-width:460px) {
+  .container11 ul{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="container11">
+    <div>
+      <p class="font-weight-bold">Please Select min 3 and max 5 options !</p>
+    </div>
+    <div>
+      <form action="/" method="get" id="form" >
+                <ul class="ks-cboxtags" >
+      
+                  <li><input type="checkbox" name="interest" id="checkboxOne" value="Analysis"><label for="checkboxOne"> Analysis</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwo" value="Artificial Intelligence"><label for="checkboxTwo"> Artificial Intelligence</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxThree" value="Automobiles"><label for="checkboxThree"> Automobiles</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxFour" value="Blockchain"><label for="checkboxFour"> Blockchain</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxFive" value="Cloud Computing"><label for="checkboxFive"> Cloud Computing</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxSix" value="Construction"><label for="checkboxSix"> Construction</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxSeven" value="Creativity"><label for="checkboxSeven"> Creativity</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxEight" value="Cryptography"><label for="checkboxEight"> Cryptography</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxNine" value="Data"><label for="checkboxNine"> Data</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTen" value="Design"><label for="checkboxTen"> Design</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxEleven" value="Digital Design"><label for="checkboxEleven"> Digital Design</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwelve" value="Embedded System & IoT"><label for="checkboxTwelve"> Embedded System & IoT</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxThirteen" value="Ethical Hacking"><label for="checkboxThirteen"> Ethical Hacking</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxFourteen" value="Gaming"><label for="checkboxFourteen"> Gaming</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxFifteen" value="Home Automation"><label for="checkboxFifteen"> Home Automation</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxSixteen" value="Instrumentation"><label for="checkboxSixteen"> Instrumentation</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxSeventeen" value="Internet of Things (IoT)"><label for="checkboxSeventeen"> Internet of Things (IoT)</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxEighteen" value="Machine Learning"><label for="checkboxEighteen"> Machine Learning</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxNineteen" value="Mathematics"><label for="checkboxNineteen"> Mathematics</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxTwenty" value="Mechanics"><label for="checkboxTwenty"> Mechanics</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyOne" value="Networking"><label for="checkboxTwentyOne"> Networking</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyTwo" value="Physics"><label for="checkboxTwentyTwo"> Physics</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyThree" value="Power System"><label for="checkboxTwentyThree"> Power System</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyFour" value="Problem Solving"><label for="checkboxTwentyFour"> Problem Solving</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyFive" value="Programming"><label for="checkboxTwentyFive"> Programming</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentySix" value="Research"><label for="checkboxTwentySix"> Research</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentySeven" value="Robotics"><label for="checkboxTwentySeven"> Robotics</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyEight" value="Simulation"><label for="checkboxTwentyEight"> Simulation</label></li>
+                  <li><input type="checkbox" name="interest" id="checkboxTwentyNine" value="Telecommunications"><label for="checkboxTwentyNine"> Telecommunications</label></li> 
+                  <li><input type="checkbox" name="interest" id="checkboxThirty" value="Technology"><label for="checkboxThirty"> Technology</label></li>
+
+                </ul>  
+              </div>
+              <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p id="errorMessage"></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="error-message" style="display: none; color: red;">Please Select only five options.</div>
+            </form>
+            <!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="...">
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="..." crossorigin="anonymous"></script>
+
+            <script>
+              // Bootstrap Modal for displaying error message
+function showError(message) {
+    $('#errorMessage').text(message);
+    $('#errorModal').modal('show');
+}
+
+              // Get all checkboxes
+              var checkboxes = document.querySelectorAll('input[name="interest"]');
+              // Initialize counter for selected checkboxes
+              var selectedCount = 0;
+          
+              // Add event listener to each checkbox
+              checkboxes.forEach(function (checkbox) {
+                  checkbox.addEventListener('change', function () {
+                      // If checkbox is checked and count is less than or equal to 5
+                      if (this.checked && selectedCount < 5) {
+                          // Increment the selected count
+                          selectedCount++;
+                      } else if (!this.checked) {
+                          // If checkbox is unchecked, decrement the selected count
+                          selectedCount--;
+                      } else {
+                          // If count is already 5, prevent checking the checkbox
+                          this.checked = false;
+                          // Display alert
+                          // document.getElementById('error-message').style.display = 'block';
+                          // alert("You can only select up to 5 checkboxes.");
+                          showError("This is an error message!");
+
+                      }
+                  });
+              });
+          </script>
+</body>
+</html>

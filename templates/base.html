@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Course Navigator.Ai{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            overflow-x: hidden;
+            flex-direction: column;
+            min-height: 100vh;
+            background: rgb(139, 243, 255);
+            background: linear-gradient(348deg, rgba(139, 243, 255, 1) 0%, rgba(152, 148, 214, 1) 62%, rgba(33, 185, 217, 1) 83%);
+        }
+    
+        .sticky-button {
+            position: fixed;
+            top: 40px;
+            right: 20px;
+            z-index: 999;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        #iframe-container {
+            top: 0;
+            right: 10;
+            width: 40%;
+            height: 100%;
+            box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+    
+        .container {
+            margin: 0%;
+            padding: 0%;
+        }
+    
+        #iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            padding-left: 20%;
+            background-color: transparent;
+        }
+    
+        .navbar {
+            height: 7rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(33, 185, 217);
+            background: linear-gradient(344deg, rgba(33, 185, 217, 1) 7%, rgba(152, 148, 214, 1) 53%, rgba(139, 243, 255, 1) 95%);
+            color: #fff;
+            font-weight: 500;
+            padding: 0 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            justify-content: space-between; 
+        }
+    
+        .logo img {
+            height: 3rem;
+            width: auto;
+            display: block; /* Ensure the logo is centered */
+            margin: 0 auto; /* Center the logo */
+        }
+    
+        .heading h1 {
+            font-size: 3rem;
+            font-family: 'Times New Roman', Times, serif;
+            margin-right: 50px;
+            color: white;
+        }
+        .footer {
+            background: rgb(33, 185, 217);
+            background: linear-gradient(344deg, rgba(33, 185, 217, 1) 7%, rgba(152, 148, 214, 1) 53%, rgba(139, 243, 255, 1) 95%);
+            text-align: center;
+            /* padding: 20px; */
+            width: auto;
+            z-index: 1000;
+            font-family: 'Arial', sans-serif;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .graph-iframe {
+            width: 100%;
+            height: calc(100vh - 15rem);
+            margin-bottom: 0;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+    
+        .footer-sec {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            align-items: center;
+        }
+    
+        .f-logo img {
+            background-color: transparent;
+            height: 3rem;
+            width: auto;
+        }
+    
+        .links {
+            display: flex;
+        }
+    
+        .socialmedia img {
+            filter: invert(1);
+            height: 25px;
+            width: auto;
+            max-width: 100%;
+        }
+    
+        .socialmedia {
+            border-radius: 25px;
+            height: 45px;
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .facebook {
+            background-color: #3B5998;
+        }
+    
+        .youtube {
+            background-color: #CD201F;
+        }
+    
+        .instagram {
+            background-color: #262626;
+        }
+    
+        .copyright {
+            margin-top: 20px;
+            color: #fcfcfc;
+            text-align: center;
+            font-size: 14px;
+        }
+        @media screen and (max-width: 768px) {
+            .copyright {
+            font-size: 12px; /* Adjust font size for smaller screens */
+        }
+}
+
+    
+        .heading {
+            margin: auto;
+        }
+    
+        @media screen and (max-width: 600px) {
+            .heading p {
+                font-size: 20px;
+            }
+
+        }
+    
+        .disclaimer {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    
+        .disclaimer p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+        }
+    
+        .disclaimer h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+    
+        .further-recommendations {
+            padding: 20px 0;
+        }
+    
+        .further-recommendations h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    
+        .further-recommendations p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+    
+        .further-recommendations li {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        @media screen and (max-width:600px)
+        {
+            .heading h1{
+                font-size: 2rem;
+            }
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://www.admissionindia.net/uploads/colleges/31/logo.png" alt="logo">
+        </div>
+        <div class="heading">
+            <h1>Course Navigator.Ai</h1>
+        </div>
+    </nav>
+    
+
+    {% block content %}
+    <!-- <div class = "disclaimer">
+        <p>Choosing a branch is a personal decision. Explore your interests, seek career opportunities, and engage with professionals in your chosen field. Assess if the role aligns with your passion and skills. The world of technology holds endless possibilities—discover where your interests meet the opportunities available.</p>
+        <h2>DISCLAIMER:</h2>
+        <p>Course recommendations provided are based on available information; individual success is not guaranteed, so explore further and choose wisely.</p>
+    </div> -->
+    <!--<div class="graph-iframe">
+      <iframe src="graph" height="500" width="1000" frameborder="0"></iframe>
+    </div>
+    -->
+    
+    <p style="padding: 20px;">Click here to view the roadmap:
+        <a id="roadmap-link" href="{{ url_for('roadmap', branch=b1) }}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px; transition: background-color 0.3s ease;">
+         <Strong>Roadmap 
+        </Strong>
+        </a>
+        
+      </p>
+      
+      <div class="further-recommendations">
+        <h2>Further Recommendations</h2>
+        <p>Explore these additional options:</p>
+        <ul>
+            <li style="font-size: medium;"><a id="branch2-link" href="/b2" target="_blank"><strong>{{ b2 }}</strong></a></li>
+            <li style="font-size: medium;"><a id="branch3-link" href="/b3" target="_blank"><strong>{{ b3 }}</strong></a></li>
+        </ul>
+    </div>
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="footer-sec">
+            <div class="f-logo">
+                <img src="https://www.admissionindia.net/uploads/colleges/31/logo.png" alt="logo">
+            </div>
+            <div class="links">
+                <a class="facebook socialmedia" href="https://www.facebook.com/LNCTGroupOfCollege" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/128/2175/2175193.png" alt="">
+                </a>
+                <a class="youtube socialmedia" href="https://www.youtube.com/c/LnctBroadcastingChannel" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="">
+                </a>
+                <a class="instagram socialmedia" href="https://www.instagram.com/lnctgroupofcolleges/" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1384/1384031.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright © 2024 H.K. KALCHURI EDUCATION TRUST</p>
+        </div>
+    </footer>
+    <script>
+        function toggleIframe() {
+            var iframeContainer = document.getElementById('iframe-container');
+            iframeContainer.style.display = (iframeContainer.style.display == 'none' ? 'block' : 'none');
+        }
+        
+    </script>
+    
+</body>
+</html>
